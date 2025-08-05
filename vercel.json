@@ -5,7 +5,7 @@
       "src": "server/index.ts",
       "use": "@vercel/node",
       "config": {
-        "nodeVersion": "22.0.0",
+        "nodeVersion": "22.18.0",
         "includeFiles": ["server/**"],
         "excludeFiles": [
           "web/**",
