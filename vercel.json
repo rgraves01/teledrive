@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "env": {},
   "builds": [
     {
-      "src": "api/dist/index.js",
+      "src": "server/index.ts",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["api/dist/**"],
+        "nodeVersion": "18.16.0",
+        "includeFiles": ["server/**"],
         "excludeFiles": [
           "web/**",
           "android/**",
@@ -22,9 +22,10 @@
       "src": "web/build/**",
       "use": "@vercel/static",
       "config": {
+        "nodeVersion": "18.16.0",
         "includeFiles": ["web/build/**"],
         "excludeFiles": [
-          "api/**",
+          "server/**",
           "android/**",
           "docs/**",
           "docker/**",
@@ -37,16 +38,12 @@
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "server/index.ts"
+    },
+    {
       "src": "/(.*)",
-      "dest": "api/dist/index.js"
-    },
-    {
-      "src": "/",
       "dest": "web/build/index.html"
-    },
-    {
-      "src": "/(.+)",
-      "dest": "web/build/$1"
     }
   ]
 }
